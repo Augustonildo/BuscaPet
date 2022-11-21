@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32228.430
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaPet", "BuscaPet\BuscaPet.csproj", "{3D721A81-1181-4DD6-AAEC-46E18BA16549}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuscaPet.Tests", "BuscaPet.Tests\BuscaPet.Tests.csproj", "{8859ADF2-F388-40A9-B1CC-50EBEFBB0E66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D721A81-1181-4DD6-AAEC-46E18BA16549}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D721A81-1181-4DD6-AAEC-46E18BA16549}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D721A81-1181-4DD6-AAEC-46E18BA16549}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D721A81-1181-4DD6-AAEC-46E18BA16549}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8859ADF2-F388-40A9-B1CC-50EBEFBB0E66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8859ADF2-F388-40A9-B1CC-50EBEFBB0E66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8859ADF2-F388-40A9-B1CC-50EBEFBB0E66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8859ADF2-F388-40A9-B1CC-50EBEFBB0E66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B55D9AE2-9990-4E80-B68B-1D87DB230F4C}
+	EndGlobalSection
+EndGlobal
