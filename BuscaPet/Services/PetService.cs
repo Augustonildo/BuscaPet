@@ -27,6 +27,12 @@ namespace BuscaPet.Services
                 throw new InvalidRegistryException();
             }
 
+            bool validBirthDate = pet.BirthDate < DateTime.Now;
+            if (!validBirthDate)
+            {
+                throw new BirthDateException();
+            }
+
             return _petRepository.RegisterPet(pet);
         }
 

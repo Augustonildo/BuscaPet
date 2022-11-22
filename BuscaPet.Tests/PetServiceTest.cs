@@ -37,11 +37,27 @@ namespace BuscaPet.Tests
         }
 
         [Fact]
+        public void AddPet_InvalidBirthDate_BirthDateException()
+        {
+            Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
+            petRepositoryMock.Setup(p => p.FetchAllPets()).Returns(ListaPets());
+
+            Pet repeatedPet = new Pet
+            {
+                Id = 3,
+                BirthDate = System.DateTime.UtcNow.AddDays(30)
+            };
+
+            Assert.Throws<BirthDateException>(() => GetService(petRepositoryMock).AddPet(repeatedPet));
+        }
+
+        [Fact]
         public void AddPet_Success()
         {
             Pet newPet = new Pet
             {
-                Id = 99
+                Id = 99,
+                BirthDate = System.DateTime.UtcNow.AddDays(-365)
             };
 
             Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
