@@ -1,4 +1,5 @@
 using BuscaPet.Domain;
+using BuscaPet.Exceptions;
 using BuscaPet.Repositories.Interfaces;
 using BuscaPet.Services;
 using BuscaPet.Services.Interfaces;
@@ -20,6 +21,38 @@ namespace BuscaPet.Tests
             IEnumerable<Pet> pets = GetService(petRepositoryMock).GetPets();
             Assert.NotEmpty(pets);
         }
+
+        [Fact]
+        public void AddPet_PetAlreadyExists_InvalidRegistryException()
+        {
+            Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
+            petRepositoryMock.Setup(p => p.FetchAllPets()).Returns(ListaPets());
+
+            Pet repeatedPet = new Pet
+            {
+                Id = 1
+            };
+
+            Assert.Throws<InvalidRegistryException>(() => GetService(petRepositoryMock).AddPet(repeatedPet));
+        }
+
+        [Fact]
+        public void AddPet_Success()
+        {
+            Pet newPet = new Pet
+            {
+                Id = 99
+            };
+
+            Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
+            petRepositoryMock.Setup(p => p.FetchAllPets()).Returns(ListaPets());
+            petRepositoryMock.Setup(p => p.RegisterPet(newPet)).Returns(0);
+
+
+            int returnValue = GetService(petRepositoryMock).AddPet(newPet);
+            Assert.Equal(0, returnValue);
+        }
+
 
         private IPetService GetService(Mock<IPetRepository> petRepository)
         {

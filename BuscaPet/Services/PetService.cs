@@ -1,4 +1,5 @@
 ﻿using BuscaPet.Domain;
+using BuscaPet.Exceptions;
 using BuscaPet.Repositories.Interfaces;
 using BuscaPet.Services.Interfaces;
 
@@ -18,17 +19,25 @@ namespace BuscaPet.Services
             return _petRepository.FetchAllPets();
         }
 
-        void IPetService.AddPet(Pet pet)
+        int IPetService.AddPet(Pet pet)
+        {
+            IEnumerable<Pet> petList = _petRepository.FetchAllPets();
+
+            bool petAlreadyExists = petList.Any(p => p.Id == pet.Id);
+            if (petAlreadyExists)
+            {
+                throw new InvalidRegistryException();
+            }
+
+            return _petRepository.RegisterPet(pet);
+        }
+
+        int IPetService.RemovePet(Pet pet)
         {
             throw new NotImplementedException();
         }
 
-        void IPetService.RemovePet(Pet pet)
-        {
-            throw new NotImplementedException();
-        }
-
-        void IPetService.UpdatePet(Pet pet)
+        int IPetService.UpdatePet(Pet pet)
         {
             throw new NotImplementedException();
         }
