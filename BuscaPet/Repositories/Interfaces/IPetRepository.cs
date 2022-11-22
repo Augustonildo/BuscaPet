@@ -6,5 +6,6 @@ namespace BuscaPet.Repositories.Interfaces
     {
         IEnumerable<Pet> FetchAllPets();
         int RegisterPet(Pet pet);
+        int DeletePet(Pet pet);
     }
 }

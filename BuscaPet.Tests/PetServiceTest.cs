@@ -53,6 +53,37 @@ namespace BuscaPet.Tests
             Assert.Equal(0, returnValue);
         }
 
+        [Fact]
+        public void RemovePet_PetDoesNotExist_InvalidRegistryException()
+        {
+            Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
+            petRepositoryMock.Setup(p => p.FetchAllPets()).Returns(ListaPets());
+
+            Pet nonexistentPet = new Pet
+            {
+                Id = 3
+            };
+
+            Assert.Throws<InvalidRegistryException>(() => GetService(petRepositoryMock).RemovePet(nonexistentPet));
+        }
+
+        [Fact]
+        public void RemovePet_PetExists_Success()
+        {
+            Pet removedPet = new Pet
+            {
+                Id = 2
+            };
+
+            Mock<IPetRepository> petRepositoryMock = new Mock<IPetRepository>();
+            petRepositoryMock.Setup(p => p.FetchAllPets()).Returns(ListaPets());
+            petRepositoryMock.Setup(p => p.DeletePet(removedPet)).Returns(0);
+
+
+            int returnValue = GetService(petRepositoryMock).RemovePet(removedPet);
+            Assert.Equal(0, returnValue);
+        }
+
 
         private IPetService GetService(Mock<IPetRepository> petRepository)
         {

@@ -21,9 +21,7 @@ namespace BuscaPet.Services
 
         int IPetService.AddPet(Pet pet)
         {
-            IEnumerable<Pet> petList = _petRepository.FetchAllPets();
-
-            bool petAlreadyExists = petList.Any(p => p.Id == pet.Id);
+            bool petAlreadyExists = PetExists(pet);
             if (petAlreadyExists)
             {
                 throw new InvalidRegistryException();
@@ -34,12 +32,24 @@ namespace BuscaPet.Services
 
         int IPetService.RemovePet(Pet pet)
         {
-            throw new NotImplementedException();
+            bool petExists = PetExists(pet);
+            if (!petExists)
+            {
+                throw new InvalidRegistryException();
+            }
+
+            return _petRepository.DeletePet(pet);
         }
 
         int IPetService.UpdatePet(Pet pet)
         {
             throw new NotImplementedException();
+        }
+
+        private bool PetExists(Pet pet)
+        {
+            IEnumerable<Pet> petList = _petRepository.FetchAllPets();
+            return petList.Any(p => p.Id == pet.Id);
         }
     }
 }
